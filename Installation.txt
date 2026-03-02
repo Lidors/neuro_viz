@@ -1,0 +1,61 @@
+──────────────────────────────────────────────────────────────
+ NeuroPy Viewer – Installation & Usage
+──────────────────────────────────────────────────────────────
+
+1. Install from scratch with Anaconda
+──────────────────────────────────────
+
+# Create a fresh environment (Python 3.10 is safest for PyQt5 + pyqtgraph)
+conda create -n neuro_viz python=3.10 -y
+conda activate neuro_viz
+
+# Core dependencies (required)
+pip install pyqt5 pyqtgraph numpy scipy h5py
+
+# Claude AI Chat (optional – only needed for the AI assistant window)
+pip install anthropic
+
+# Video viewer (optional – only needed for the Video + Neural window)
+pip install opencv-python
+
+
+2. Run the app
+──────────────
+
+cd path/to/neuro_viz
+python main.py                        # opens a file-picker dialog
+python main.py path/to/res.mat        # loads the session directly
+
+
+3. Dependency reference
+────────────────────────
+
+Package           Required?   Used for
+──────────────    ─────────   ──────────────────────────────────────────
+pyqt5             yes         GUI framework
+pyqtgraph         yes         All plots (PSTH, heatmap, ACG, metrics)
+numpy             yes         Array math everywhere
+scipy             yes         Load .mat files, Gaussian smoothing
+h5py              yes         Load MATLAB v7.3 .mat files (HDF5 format)
+anthropic         optional    Claude AI Chat assistant (Ctrl+L)
+                              Install with:  pip install anthropic
+                              Requires an API key from console.anthropic.com
+                              Set ANTHROPIC_API_KEY env var, or paste when prompted.
+opencv-python     optional    Video + Neural viewer (video playback)
+                              Install with:  pip install opencv-python
+                              The viewer opens but shows "opencv-python
+                              not installed" if cv2 is missing.
+
+
+4. Notes
+─────────
+
+• Avoid installing PyQt5 via conda — the pip version is more reliably
+  up to date and avoids DLL conflicts on Windows.
+
+• Python 3.10 is recommended.  3.11–3.13 also work (the __pycache__
+  shows .cpython-313 files) but PyQt5 wheels are most stable on 3.10.
+
+• opencv-python is NOT needed to use any other part of the viewer.
+  All other windows (PSTH, Population, Compare, Cell Compare) work
+  without it.
